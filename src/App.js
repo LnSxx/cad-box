@@ -16,9 +16,9 @@ function App() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ 
-        length: 30,
-        width: 40,
-        height: 50
+        length: 10,
+        width: 10,
+        height: 10
        })
   };
     fetch("http://localhost:3002", requestOptions)
@@ -26,8 +26,9 @@ function App() {
       .then(
         (result) => {
           console.log(result)
-          setIsLoaded(true);
           setItems(result);
+          setIsLoaded(true);
+         
         },
         (error) => {
           setIsLoaded(true);

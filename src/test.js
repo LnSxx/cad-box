@@ -1,7 +1,6 @@
 import React from "react";
 import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import './css/Renderer.css'
 
 const style = {
     height: 1000 // we can control scene size by setting container dimensions
@@ -35,7 +34,7 @@ class Renderer extends React.Component {
             0.1, // near plane
             1000 // far plane
         );
-        this.camera.position.z = 200;
+        this.camera.position.z = 9;
         this.controls = new OrbitControls( this.camera, this.mount );
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( width, height );
@@ -43,13 +42,23 @@ class Renderer extends React.Component {
 
     };
     addCustomSceneObjects = () => {
-        this.box = new THREE.Group();
+        // const material = new THREE.MeshPhongMaterial( {
+        //     color: 0x156289,
+        //     emissive: 0x072534,
+        //     side: THREE.DoubleSide,
+        //     flatShading: true
+        // } );
+        // this.props.data.boxData.forEach((item)=>{
+            
+        // })
         const material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
-        this.props.data.boxData.forEach((item)=>{
             const geometry = new THREE.Geometry();
-            item.forEach((point)=>{
-                geometry.vertices.push( new THREE.Vector3( point[0], point[1], point[2] ) );
-            })
+            // item.forEach((point)=>{
+            //     geometry.vertices.push( new THREE.Vector3( point[0], point[1], point[2] ) );
+            // })
+            geometry.vertices.push( new THREE.Vector3( -50, -50, 0 ) );
+            geometry.vertices.push( new THREE.Vector3(  50, -50, 0 ) );
+            geometry.vertices.push( new THREE.Vector3(  50,  50, 0 ) );
             //create a new face using vertices 0, 1, 2
             const normal = new THREE.Vector3( 0, 0, 1 ); //optional
             const color = new THREE.Color( 0xfff ); //optional
@@ -57,13 +66,11 @@ class Renderer extends React.Component {
             const face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );
             //add the face to the geometry's faces array
             geometry.faces.push( face );
-            // the face normals and vertex normals can be calculated automatically if not supplied above
-            geometry.computeFaceNormals();
-            geometry.computeVertexNormals();
-            this.triangle = new THREE.Mesh( geometry, material )
-            this.box.add( this.triangle );
-        })
-        this.scene.add( this.box );
+            //the face normals and vertex normals can be calculated automatically if not supplied above
+            // geometry.computeFaceNormals();
+            // geometry.computeVertexNormals();
+            this.sefe = new THREE.Mesh( geometry, material )
+            this.scene.add( this.sefe );
         const lights = [];
         lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
         lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
@@ -80,8 +87,8 @@ class Renderer extends React.Component {
     };
 
     startAnimationLoop = () => {
-        this.box.rotation.x += 0.01;
-        this.box.rotation.y += 0.01;
+        this.sefe.rotation.x += 0.01;
+        this.sefe.rotation.y += 0.01;
         this.renderer.render( this.scene, this.camera );
         this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
     };
@@ -95,7 +102,7 @@ class Renderer extends React.Component {
     };
 
     render() {
-        return <div className='renderer' ref={ref => (this.mount = ref)} />;
+        return <div style={style} ref={ref => (this.mount = ref)} />;
     }
 }
 
