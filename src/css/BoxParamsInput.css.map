@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,SAAS,CAAC;EACN,QAAQ,EAAE,QAAQ;EAClB,WAAW,EAAE,GAAG;EAChB,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;EACvB,KAAK,EAAE,KAAK;EACZ,gBAAgB,EAAE,KAAK;CAAG",
+    "sources": [
+        "BoxParamsInput.sass"
+    ],
+    "names": [],
+    "file": "BoxParamsInput.css"
+}

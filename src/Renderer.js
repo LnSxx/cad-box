@@ -3,10 +3,6 @@ import * as THREE from 'three';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import './css/Renderer.css'
 
-const style = {
-    height: 1000 // we can control scene size by setting container dimensions
-};
-
 class Renderer extends React.Component {
     constructor(props) {
         super(props)
@@ -95,7 +91,7 @@ class Renderer extends React.Component {
     };
 
     render() {
-        return <div className='renderer' ref={ref => (this.mount = ref)} />;
+        return <div className='renderer' ref={ref => (this.mount = ref)} id='testID'/>;
     }
 }
 
