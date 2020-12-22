@@ -43,7 +43,7 @@ class Renderer extends React.Component {
     };
     addCustomSceneObjects = () => {
         this.box = new THREE.Group();
-        const material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
+        const material = new THREE.MeshStandardMaterial( { color : 0x005cc8 } );
         this.props.data.box.forEach((item)=>{
             const geometry = new THREE.Geometry();
             item.forEach((point)=>{
