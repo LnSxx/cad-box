@@ -3,14 +3,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import BoxParamsInput from './BoxParamsInput';
 import Box from './Box';
+import {connect} from 'react-redux'
+import fetchBox from './fetchBox'
 
-function App() {
+function App(props) {
+    let storeState = props
     return (
       <>
-      <BoxParamsInput />
-      <Box />
+      <BoxParamsInput fetchBox={storeState.fetchBox}/>
+      <Box box={storeState}/>
       </>
     );
   }
 
-export default App;
+const mapStateToProps = (store) => {
+  return {
+    box: store.actionNames.box
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBox: () => dispatch(fetchBox())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
