@@ -29,10 +29,10 @@ class Renderer extends React.Component {
         const height = this.mount.clientHeight;
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(
-            75, // fov = field of view
-            width / height, // aspect ratio
-            0.1, // near plane
-            1000 // far plane
+            75, 
+            width / height, 
+            0.1, 
+            1000 
         );
         this.camera.position.z = 200;
         this.controls = new OrbitControls( this.camera, this.mount );
@@ -49,14 +49,11 @@ class Renderer extends React.Component {
             item.forEach((point)=>{
                 geometry.vertices.push( new THREE.Vector3( point[0], point[1], point[2] ) );
             })
-            //create a new face using vertices 0, 1, 2
-            const normal = new THREE.Vector3( 0, 0, 1 ); //optional
-            const color = new THREE.Color( 0xfff ); //optional
-            const materialIndex = 0; //optional
+            const normal = new THREE.Vector3( 0, 0, 1 ); 
+            const color = new THREE.Color( 0xfff ); 
+            const materialIndex = 0; 
             const face = new THREE.Face3( 0, 1, 2, normal, color, materialIndex );
-            //add the face to the geometry's faces array
             geometry.faces.push( face );
-            // the face normals and vertex normals can be calculated automatically if not supplied above
             geometry.computeFaceNormals();
             geometry.computeVertexNormals();
             this.triangle = new THREE.Mesh( geometry, material )
