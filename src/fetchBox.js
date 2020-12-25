@@ -1,6 +1,6 @@
 import {startFetchBox, finishFetchBox, failFetchBox} from './actions'
 
-export default function fetchBox() {
+export default function fetchBox(length, width, height) {
   return dispatch => {
     dispatch(startFetchBox());
     return fetch("http://localhost:3002", {
@@ -10,14 +10,13 @@ export default function fetchBox() {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({ 
-    length: document.getElementById('length').value,
-    width: document.getElementById('width').value,
-    height: document.getElementById('height').value
+    length: length,
+    width: width,
+    height: height
    })
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result)
         dispatch(finishFetchBox(result));
         return result;
       })

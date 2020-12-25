@@ -4,10 +4,7 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import './css/Renderer.css'
 
 class Renderer extends React.Component {
-    constructor(props) {
-        super(props)
-        this.boxdata = this.props.data.box
-    }
+    
     componentDidMount() {
         this.sceneSetup();
         this.addCustomSceneObjects();
@@ -16,7 +13,7 @@ class Renderer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.data.box !== prevProps.data.box) {
+        if (this.props.data !== prevProps.data) {
             while(this.scene.children.length > 0){ 
                 this.scene.remove(this.scene.children[0]); 
             }
@@ -44,7 +41,7 @@ class Renderer extends React.Component {
     addCustomSceneObjects = () => {
         this.box = new THREE.Group();
         const material = new THREE.MeshStandardMaterial( { color : 0x005cc8 } );
-        this.props.data.box.forEach((item)=>{
+        this.props.data.forEach((item)=>{
             const geometry = new THREE.Geometry();
             item.forEach((point)=>{
                 geometry.vertices.push( new THREE.Vector3( point[0], point[1], point[2] ) );
