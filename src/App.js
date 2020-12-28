@@ -6,19 +6,22 @@ import {connect} from 'react-redux'
 import fetchBox from './fetchBox'
 import Renderer from './Renderer';
 
-function App({dispatch, dimensions, box}) {
+function App({dispatch, dimensions, box, isFetching, error}) {
     return (
-      <>
+      <div className='App'>
       <BoxParamsInput dispatch={dispatch} fetchBox={fetchBox} dimensions={dimensions}/>
-      <Renderer data={box} />
-      </>
+      {(error === null)? <Renderer data={box} isFetching={isFetching} error={error}/> : <div className='loadScreen'>{error.message}</div>}
+      </div>
     );
   }
 
 const mapStateToProps = (store) => {
+
   return {
     box: store.box,
-    dimensions: store.dimensions
+    dimensions: store.dimensions,
+    isFetching: store.isFetching,
+    error: store.error
   }
 }
 
