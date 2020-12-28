@@ -1,13 +1,11 @@
 import React, {useRef } from "react";
-import * as THREE from "three"; 
 import { Canvas, useFrame } from 'react-three-fiber'
 import './css/Renderer.css'
 
 function Box(props) {
-  const material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
   const mesh = useRef()
   const boxTriangles = props.box.map((triangle) => {
-    const triangleKey = triangle[0].join('')+triangle[1].join('')+triangle[2].join('')
+    const triangleKey = triangle.map((point) => point.join('')).join('')
     return (
       <mesh key={triangleKey} >
         <geometry>
@@ -25,7 +23,7 @@ function Box(props) {
   })
   
   return (
-    <group ref={mesh}  position={[0, 0, 0]} material={material}>
+    <group ref={mesh}  position={[0, 0, 0]}>
       {boxTriangles}
     </group>
   )
