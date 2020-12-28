@@ -7,8 +7,10 @@ function Box(props) {
   const material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
   const mesh = useRef()
   const boxTriangles = props.box.map((triangle) => {
+    const triangleKey = triangle[0].join('')+triangle[1].join('')+triangle[2].join('')
+    console.log(triangleKey)
     return (
-      <mesh key={Math.random()} >
+      <mesh key={triangleKey} >
         <geometry>
           <vector3 attachArray="vertices" args={triangle[0]}></vector3>
           <vector3 attachArray="vertices" args={triangle[1]}></vector3>
