@@ -10,7 +10,7 @@ function App({dispatch, dimensions, box, isFetching, error}) {
     return (
       <div className='App'>
       <BoxParamsInput dispatch={dispatch} fetchBox={fetchBox} dimensions={dimensions}/>
-      {(isFetching === false && error === null)? <Renderer data={box} isFetching={isFetching} error={error}/> : null}
+      {(error === null)? <Renderer data={box} isFetching={isFetching} error={error}/> : <div className='loadScreen'>{error.message}</div>}
       </div>
     );
   }

@@ -1,30 +1,30 @@
 import React, {useRef } from "react";
+import * as THREE from "three"; 
 import { Canvas, useFrame } from 'react-three-fiber'
 import './css/Renderer.css'
 
 function Box(props) {
-  console.log(props)
+  const material = new THREE.MeshStandardMaterial( { color : 0x00cc00 } );
   const mesh = useRef()
   const boxTriangles = props.box.map((triangle) => {
     return (
-      <mesh>
-        <geometry attach="geometry">
+      <mesh key={Math.random()} >
+        <geometry>
           <vector3 attachArray="vertices" args={triangle[0]}></vector3>
           <vector3 attachArray="vertices" args={triangle[1]}></vector3>
           <vector3 attachArray="vertices" args={triangle[2]}></vector3>
-          <face3 attachArray="faces" args={[0, 1, 2]}></face3>
-        </geometry>
-        <meshBasicMaterial attach="material" color="red"/>
+          <face3 attachArray="faces" args={[0, 1, 2]}></face3> 
+        </geometry>   
+        <meshBasicMaterial name="material" color="#0075ff"/>  
       </mesh>
     )
   })
-  console.log(boxTriangles)
   useFrame(() => {
     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
   })
   
   return (
-    <group ref={mesh}  position={[0, 0, -200]}>
+    <group ref={mesh}  position={[0, 0, 0]} material={material}>
       {boxTriangles}
     </group>
   )
@@ -33,17 +33,11 @@ function Box(props) {
 function Renderer(props) {
     return  (
       <div className='renderer'>
-        <Canvas>
-        <perspectiveCamera position={[0, 0, 200]} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-        <pointLight position={[-10, -10, -10]} />    
+        <Canvas camera={{ position: [0, 0, 200], fov: 100 }}>
         <Box box={props.data}/>
       </Canvas>
       </div>
     )
-    
-  
 }
 
 export default Renderer
