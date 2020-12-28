@@ -8,7 +8,6 @@ function Box(props) {
   const mesh = useRef()
   const boxTriangles = props.box.map((triangle) => {
     const triangleKey = triangle[0].join('')+triangle[1].join('')+triangle[2].join('')
-    console.log(triangleKey)
     return (
       <mesh key={triangleKey} >
         <geometry>
